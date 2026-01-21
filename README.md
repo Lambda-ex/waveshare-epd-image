@@ -55,8 +55,9 @@ It is not intended for use on Windows or macOS.
 To save battery and/or RAM, or to speed up the displaying process, disable `refresh`.
 
 # Install Instructions
-(Instructions here regarding setup)
+Follow instructions on the Waveshare EPD documentation for wiring.
 
+Install the function library:  
 ```
 sudo apt-get update
 sudo apt-get install python3-pip
@@ -64,6 +65,8 @@ sudo apt-get install python3-pil
 sudo apt-get install python3-numpy
 sudo apt-get install python3-spidev
 ```
+
+Run the demo
 
 # Credit & Attribution
 
