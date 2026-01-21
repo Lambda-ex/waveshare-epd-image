@@ -2,7 +2,7 @@
 **Version:** 0.0  
 **Status:** Early development
 
-A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays.
+A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays using a Raspberry Pi and GPIO.
 
 Most Waveshare examples require copying scripts, editing driver code, and handling image conversion manually.
 This library reduces all of that to a single function call.
@@ -47,3 +47,13 @@ display_image("image.png", mode="fit", rotation=90, refresh=false)
 
 ## Refresh
 To save battery and/or RAM, or to speed up the displaying process, disable `refresh`.
+
+# Install Instructions
+(Instructions here regarding setup)
+
+# Credit & Attribution
+
+This project is not affiliated with or endorsed by Waveshare.
+
+Waveshare® is a registered trademark of Waveshare Electronics.  
+This library is an independent, open-source project designed to simplify image display on Waveshare e-paper (EPD) displays using a Raspbery Pi.
