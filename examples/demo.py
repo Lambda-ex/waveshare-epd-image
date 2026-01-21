@@ -7,4 +7,4 @@ sys.path.insert(0, str(ROOT / "src"))
 from epd_image import display_image
 
 print("Displaying image on EPD...") #
-display_image("test2.jpg", mode="fit", rotation=90, model="epd5in65f", refresh=False)
+display_image("vertical.png", mode="stretch", rotation=90, model="epd5in65f", refresh=True)
