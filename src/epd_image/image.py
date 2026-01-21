@@ -63,6 +63,7 @@ def prepare_for_epd(img: Image.Image, driver_module, epd_obj=None) -> Image.Imag
     """
     # Try to infer color capability (you can refine later)
     has_color = False
+
     for attr in ("is_color", "has_color", "color"):
         if hasattr(epd_obj, attr) and bool(getattr(epd_obj, attr)):
             has_color = True
@@ -71,6 +72,9 @@ def prepare_for_epd(img: Image.Image, driver_module, epd_obj=None) -> Image.Imag
     if hasattr(driver_module, "EPD_COLOR"):
         has_color = True
 
+    # TODO this is only to demonstrate the idea; real detection may vary
+    has_color = True
+    
     if has_color:
         # Keep color; drivers often accept RGB and do their own quantization
         return img.convert("RGB")
