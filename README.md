@@ -19,6 +19,8 @@ display_image("image.png", mode="fit", rotation=90)
 # Skip refresh (optional)
 display_image("image.png", mode="fit", rotation=90, refresh=false)
 ```
+**Note:** Color rendering automatically matches the capabilities of the display.  
+Color-capable displays will render color images; monochrome displays will not.
 
 ## Supported Input Image Formats
 | Image Format | Supported |
