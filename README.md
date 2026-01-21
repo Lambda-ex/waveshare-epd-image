@@ -14,7 +14,7 @@ from epd_image import display_image
 display_image("image.png", mode="fit", model="epd5in65f", rotation=90)
 
 # Skip refresh (optional)
-display_image("image.png", mode="fit", model="epd5in65f", rotation=90, refresh=false)
+display_image("image.png", mode="fit", model="epd5in65f", rotation=90, refresh=False)
 ```
 **Note:** Color rendering automatically matches the capabilities of the display.  
 Color-capable displays will render color images; monochrome displays will not.
