@@ -1,5 +1,5 @@
 # waveshare-epd-image
-**Version:** 0.1
+**Version:** 0.3
 **Status:** Functional
 
 A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays using a Raspberry Pi and GPIO.
@@ -10,14 +10,11 @@ This library reduces all of that to a single function call.
 ```python
 from epd_image import display_image
 
-# Your display model here
-init_epd("epd5in65f")
-
-# Display
-display_image("image.png", mode="fit", rotation=90)
+# Display Image (pass display model/driver name)
+display_image("image.png", mode="fit", model="epd5in65f", rotation=90)
 
 # Skip refresh (optional)
-display_image("image.png", mode="fit", rotation=90, refresh=false)
+display_image("image.png", mode="fit", model="epd5in65f", rotation=90, refresh=false)
 ```
 **Note:** Color rendering automatically matches the capabilities of the display.  
 Color-capable displays will render color images; monochrome displays will not.
