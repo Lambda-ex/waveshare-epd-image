@@ -57,6 +57,14 @@ To save battery and/or RAM, or to speed up the displaying process, disable `refr
 # Install Instructions
 (Instructions here regarding setup)
 
+```
+sudo apt-get update
+sudo apt-get install python3-pip
+sudo apt-get install python3-pil
+sudo apt-get install python3-numpy
+sudo apt-get install python3-spidev
+```
+
 # Credit & Attribution
 
 This project is not affiliated with or endorsed by Waveshare.
