@@ -3,7 +3,6 @@ from typing import Literal
 
 Mode = Literal["fit", "fill", "stretch"]
 
-
 def transform_image(img: Image.Image, width: int, height: int, mode: Mode, rotation: int) -> Image.Image:
     # Ensure consistent orientation first
     if rotation:
@@ -53,6 +52,24 @@ def transform_image(img: Image.Image, width: int, height: int, mode: Mode, rotat
 
     raise ValueError("mode must be one of: fit, fill, stretch")
 
+def epd_supports_color(epd_obj) -> bool:
+    """
+    Heuristic: Waveshare mono drivers typically expose BLACK/WHITE only.
+    Color drivers expose additional named colors (RED/YELLOW/ORANGE/etc).
+    """
+    if epd_obj is None:
+        return False
+
+    # Most common mono: BLACK + WHITE only
+    has_black = hasattr(epd_obj, "BLACK")
+    has_white = hasattr(epd_obj, "WHITE")
+
+    # Color panels typically add at least one of these
+    extra_color_attrs = ("RED", "YELLOW", "ORANGE", "GREEN", "BLUE")
+
+    has_extra = any(hasattr(epd_obj, a) for a in extra_color_attrs)
+
+    return has_black and has_white and has_extra
 
 def prepare_for_epd(img: Image.Image, driver_module, epd_obj=None) -> Image.Image:
     """
@@ -61,23 +78,8 @@ def prepare_for_epd(img: Image.Image, driver_module, epd_obj=None) -> Image.Imag
     Many mono EPDs prefer 1-bit ('1'). Color panels vary.
     This keeps it simple and defaults to mono unless we can detect color support.
     """
-    # Try to infer color capability (you can refine later)
-    has_color = False
+    has_color = epd_supports_color(epd_obj)
 
-    for attr in ("is_color", "has_color", "color"):
-        if hasattr(epd_obj, attr) and bool(getattr(epd_obj, attr)):
-            has_color = True
-
-    # Some driver modules define constants like EPD_COLOR, etc. (not always)
-    if hasattr(driver_module, "EPD_COLOR"):
-        has_color = True
-
-    # TODO this is only to demonstrate the idea; real detection may vary
-    has_color = True
-    
     if has_color:
-        # Keep color; drivers often accept RGB and do their own quantization
         return img.convert("RGB")
-    else:
-        # Monochrome: convert to 1-bit with dithering
-        return img.convert("1")
+    return img.convert("1")
