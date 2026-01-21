@@ -22,6 +22,13 @@ display_image("image.png", mode="fit", rotation=90, refresh=false)
 **Note:** Color rendering automatically matches the capabilities of the display.  
 Color-capable displays will render color images; monochrome displays will not.
 
+## Platform Support
+
+This library is designed to run on Linux-based systems with SPI support,
+such as the Raspberry Pi.
+
+It is not intended for use on Windows or macOS.
+
 ## Supported Input Image Formats
 | Image Format | Supported |
 |-------------|-----------|
