@@ -74,7 +74,8 @@ Run the demo
 - This project is ongoing. Though this has worked with my personal hardware, I not certain it will run on yours. Theoretically it should though!
 - This is my first public repository, be kind but do offer productive criticism if needed.
 
-I love Waveshares EPD. I believe e-paper is an elegant way to display computer graphics. I found myself writing a few programs for the display, and ran into an issue. There were so many helper functions and scripts I was writing, it was becoming overwhelming to write one for each project.  
+I love Waveshares EPD. I believe e-paper is an elegant way to display computer graphics. I found myself writing a few programs for the display, and ran into an issue. There were so many helper functions and scripts I was writing, it was becoming overwhelming to write one for each project.
+
 My regular workflow would be to create an image I'd want to display (weather, calendar, a clock) then send it to the EPD. However due to repeated code, I saw an opporitunity. How great would it be to just import a library that does all the work?
 
 Displaying an image wasn't as easy as I thought. Questions arose such as:  
