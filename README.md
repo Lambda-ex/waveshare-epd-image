@@ -70,6 +70,21 @@ pip install (need more details here to install the library!)
 
 Run the demo
 
+# Additional Notes & Developer Words
+- This project is ongoing. Though this has worked with my personal hardware, I not certain it will run on yours. Theoretically it should though!
+- This is my first public repository, be kind but do offer productive criticism if needed.
+
+I love Waveshares EPD. I believe e-paper is an elegant way to display computer graphics. I found myself writing a few programs for the display, and ran into an issue. There were so many helper functions and scripts I was writing, it was becoming overwhelming to write one for each project.  
+My regular workflow would be to create an image I'd want to display (weather, calendar, a clock) then send it to the EPD. However due to repeated code, I saw an opporitunity. How great would it be to just import a library that does all the work?
+
+Displaying an image wasn't as easy as I thought. Questions arose such as:  
+- What happens when an image is too large or small for the display? 
+- Why shouldn't I be able to simply rotate the image if the display is portrait?
+- What if I wanted to display a portrait image on a landscape display?  
+I found it fascinating that there could potentially be an algoritm that would solve these issues, and there was! Given an input image and the resolution of the display, you can calculate how to fit it given three simple configurations: Fit, Fill, Stretch. Sound familiar? I remember seeing the same three configs when setting my desktop background in Windows. I couldn't find the original author, but kudos to them! Performing these operations taking into account the rotation of the image displays it nicely.  
+Given an EPD display model, I can pull the resolution from the Waveshare drivers, run the algorithm to fit the image, and display it. Boom. I have solved my issue of wanting to show an image on a screen.  
+Hopefully I can continue using this library for future projects, and more importantly, people will find it useful for themselves as well. This is my first official public personal project and to say the least I am very proud.
+
 # Credit & Attribution
 
 This project is not affiliated with or endorsed by Waveshare.
