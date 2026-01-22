@@ -66,6 +66,8 @@ sudo apt-get install python3-numpy
 sudo apt-get install python3-spidev
 ```
 
+pip install (need more details here to install the library!)
+
 Run the demo
 
 # Credit & Attribution
