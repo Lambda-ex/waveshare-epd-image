@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waveshare-epd-image"
-version = "0.6.0"
+version = "0.6.1"
 description = "A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -19,3 +19,6 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"epd_image.drivers" = ["*.so"]

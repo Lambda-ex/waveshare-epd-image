@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.1] - 2026-07-18
+### Fixed
+- Packaging: bundle the driver `.so` files in the wheel so pip installs include them
+
 ## [0.6.0] - 2026-07-18
 ### Added
 - Tri-color ("b"/"bc") panel support: images are split into black and red/yellow planes automatically
