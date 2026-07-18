@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2026-07-18
+### Added
+- `scale` parameter: render the image at a fraction of the panel, centered
+  with white margins (for frames/bezels that cover the panel edges)
+
 ## [0.6.1] - 2026-07-18
 ### Fixed
 - Packaging: bundle the driver `.so` files in the wheel so pip installs include them

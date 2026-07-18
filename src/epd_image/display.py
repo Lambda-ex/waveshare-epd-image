@@ -82,6 +82,7 @@ def display_image(
     rotation: Rotation = 0,
     model: Optional[str] = None,
     refresh: bool = True,
+    scale: float = 1.0,
 ):
     """
     Display an image on a Waveshare EPD.
@@ -91,6 +92,8 @@ def display_image(
     - rotation: 0 | 90 | 180 | 270 (clockwise)
     - refresh: if True, fully clears the panel before drawing (reduces ghosting).
       Disable to skip the clear pass and update faster.
+    - scale: render the image at this fraction of the panel (0-1], centered
+      with white margins. Useful when a physical frame covers the panel edges.
 
     The panel is always put to sleep afterwards, even on error, to avoid
     leaving it under high voltage.
@@ -118,7 +121,7 @@ def display_image(
 
         # Load + transform
         with Image.open(path) as src:
-            img = transform_image(src, width, height, mode=mode, rotation=rotation)
+            img = transform_image(src, width, height, mode=mode, rotation=rotation, scale=scale)
             img.load()
 
         if refresh:

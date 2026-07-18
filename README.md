@@ -1,5 +1,5 @@
 # waveshare-epd-image
-**Version:** 0.6.1  
+**Version:** 0.7.0  
 **Status:** Functional
 
 A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays using a Raspberry Pi and GPIO.
@@ -55,6 +55,14 @@ It is not intended for use on Windows or macOS.
 |  `90` | Rotate 90° clockwise  |
 | `180` | Rotate 180°           |
 | `270` | Rotate 270° clockwise |
+
+## Scale
+`scale` renders the image at a fraction of the panel size, centered with white
+margins on all sides. Handy when a physical frame or bezel covers the panel edges:
+
+```python
+display_image("image.png", mode="fit", model="epd5in65f", scale=0.9)
+```
 
 ## Refresh
 When `refresh=True` (the default), the panel is fully cleared before the image is drawn.

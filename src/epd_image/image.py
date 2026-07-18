@@ -3,10 +3,22 @@ from typing import Literal
 
 Mode = Literal["fit", "fill", "stretch"]
 
-def transform_image(img: Image.Image, width: int, height: int, mode: Mode, rotation: int) -> Image.Image:
+def transform_image(img: Image.Image, width: int, height: int, mode: Mode, rotation: int,
+                    scale: float = 1.0) -> Image.Image:
     # Ensure consistent orientation first
     if rotation:
         img = img.rotate(-rotation, expand=True)  # PIL rotate is CCW; negative makes it clockwise
+
+    if not 0 < scale <= 1:
+        raise ValueError("scale must be between 0 (exclusive) and 1 (inclusive)")
+    if scale < 1:
+        # Render at a fraction of the panel and center on white, leaving
+        # margins all around (e.g. for frames that cover the panel edges).
+        content = transform_image(img, int(round(width * scale)), int(round(height * scale)),
+                                  mode=mode, rotation=0)
+        canvas = Image.new("RGB", (width, height), color=(255, 255, 255))
+        canvas.paste(content, ((width - content.width) // 2, (height - content.height) // 2))
+        return canvas
 
     if mode == "stretch":
         return img.resize((width, height), Image.LANCZOS)
