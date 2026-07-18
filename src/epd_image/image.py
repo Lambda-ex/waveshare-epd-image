@@ -52,6 +52,25 @@ def transform_image(img: Image.Image, width: int, height: int, mode: Mode, rotat
 
     raise ValueError("mode must be one of: fit, fill, stretch")
 
+def split_tricolor(img: Image.Image) -> tuple:
+    """
+    Split an image into the two 1-bit planes tri-color ("b"/"bc") panels expect:
+    a black plane and a red/yellow plane. In each plane, 0 = drawn, 255 = blank,
+    matching what the Waveshare drivers' getbuffer() expects.
+    """
+    # Quantize to the panel's nominal colors: black, white, red, yellow
+    pal_image = Image.new("P", (1, 1))
+    pal_image.putpalette((0, 0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 0) + (0, 0, 0) * 252)
+    quantized = img.convert("RGB").quantize(palette=pal_image)
+
+    # Map palette indices to plane pixels (index 0 = black, 2/3 = red/yellow)
+    data = quantized.tobytes()
+    black_lut = bytes(0 if i == 0 else 255 for i in range(256))
+    ry_lut = bytes(0 if i in (2, 3) else 255 for i in range(256))
+    black = Image.frombytes("L", quantized.size, data.translate(black_lut)).convert("1")
+    ry = Image.frombytes("L", quantized.size, data.translate(ry_lut)).convert("1")
+    return black, ry
+
 def epd_supports_color(epd_obj) -> bool:
     """
     Heuristic: Waveshare mono drivers typically expose BLACK/WHITE only.

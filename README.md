@@ -1,5 +1,5 @@
 # waveshare-epd-image
-**Version:** 0.5.1  
+**Version:** 0.6.0  
 **Status:** Functional
 
 A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays using a Raspberry Pi and GPIO.
@@ -17,7 +17,12 @@ display_image("image.png", mode="fit", model="epd5in65f", rotation=90)
 display_image("image.png", mode="fit", model="epd5in65f", rotation=90, refresh=False)
 ```
 **Note:** Color rendering automatically matches the capabilities of the display.  
-Color-capable displays will render color images; monochrome displays will not.
+Color-capable displays will render color images; monochrome displays will not.  
+Tri-color panels (the "b"/"bc" models, e.g. `epd2in13b_V4`, `epd7in5b_V2`) are supported:
+the image is automatically split into black and red/yellow planes.
+
+The panel is always put to sleep after displaying — even if an error occurs —
+so it is never left under high voltage.
 
 ## Platform Support
 
@@ -52,23 +57,39 @@ It is not intended for use on Windows or macOS.
 | `270` | Rotate 270° clockwise |
 
 ## Refresh
-To save battery and/or RAM, or to speed up the displaying process, disable `refresh`.
+When `refresh=True` (the default), the panel is fully cleared before the image is drawn.
+This reduces ghosting from the previous image, at the cost of an extra refresh cycle.
+Set `refresh=False` to skip the clear pass and update faster.
 
 # Install Instructions
-Follow instructions on the Waveshare EPD documentation for wiring.
+Follow instructions on the Waveshare EPD documentation for wiring, and make sure
+SPI is enabled (`sudo raspi-config` → Interface Options → SPI).
 
-Install the function library:  
+## Required packages
+The library needs the following Python packages at runtime:
+
+| Package    | Purpose                          | Install                          |
+|------------|----------------------------------|----------------------------------|
+| `Pillow`   | Image loading and transformation | `sudo apt-get install python3-pil` (or pip) |
+| `spidev`   | SPI communication with the panel | `sudo apt-get install python3-spidev` (or pip) |
+| `gpiozero` | GPIO control (Raspberry Pi)      | `sudo apt-get install python3-gpiozero` (or pip) |
+
+On a Raspberry Pi:
 ```
 sudo apt-get update
-sudo apt-get install python3-pip
-sudo apt-get install python3-pil
-sudo apt-get install python3-numpy
-sudo apt-get install python3-spidev
+sudo apt-get install python3-pip python3-pil python3-spidev python3-gpiozero
 ```
 
-pip install (need more details here to install the library!)
+Install the library:
+```
+pip install git+https://github.com/Lambda-ex/waveshare-epd-image.git
+```
 
-Run the demo
+Run the demo:
+```
+cd examples
+python3 demo.py
+```
 
 # Additional Notes & Developer Words
 - This project is ongoing. Though this has worked with my personal hardware, I not certain it will run on yours. Theoretically it should though!

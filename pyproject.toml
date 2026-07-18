@@ -4,15 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waveshare-epd-image"
-version = "0.5.1"
+version = "0.6.0"
 description = "A simple, no-boilerplate Python library for displaying images on Waveshare e-paper (EPD) displays."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 
 dependencies = [
-  "Pillow",
-  "numpy"
+  "Pillow"
 ]
 
 [tool.setuptools]
